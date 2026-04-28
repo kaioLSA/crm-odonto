@@ -39,7 +39,7 @@ export function Sidebar() {
       {/* Logo */}
       <div className="px-4 h-[72px] flex items-center gap-3 border-b border-[#222]">
         <img
-          src="/logo.svg"
+          src={`${import.meta.env.BASE_URL}logo.svg`}
           alt="Premium Odonto"
           className="h-10 w-10 object-contain"
         />
