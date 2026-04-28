@@ -1,0 +1,64 @@
+{
+  "project": {
+    "name": "Pixel Agents — CRM Odontológico",
+    "description": "CRM simples para clínica odontológica, inspirado em Kommo, com pipeline Kanban, integrações simuladas (Meta Ads, e-Clínica) e atendimento via chat com IA.",
+    "version": "0.1.0",
+    "author": "Pixel Agents Team"
+  },
+  "stack": {
+    "framework": "React 18 + TypeScript (TSX)",
+    "bundler": "Vite 5",
+    "styling": "TailwindCSS 3 (dark-first)",
+    "state": "Zustand 4 com persistência em localStorage",
+    "router": "React Router 6",
+    "dnd": "@hello-pangea/dnd",
+    "icons": "lucide-react"
+  },
+  "design_system": {
+    "theme": "dark",
+    "background": "#0f172a",
+    "surface": "#1e293b",
+    "primary": "#6366f1",
+    "accent": "#8b5cf6",
+    "font": "Inter"
+  },
+  "features": [
+    "Dashboard com métricas, funil e atividade recente",
+    "Pipeline Kanban com drag-and-drop entre colunas",
+    "Leads/Pacientes com tabela, filtros e detalhes em modal",
+    "Integração Meta Ads (mock) com webhook simulado",
+    "Integração e-Clínica (mock) — criação de paciente e agendamento",
+    "Chat estilo WhatsApp com sugestões de IA por estágio do funil",
+    "Tarefas e follow-ups vinculados a leads",
+    "Notificações em tempo real",
+    "Persistência local via localStorage",
+    "Filtro por origem e status",
+    "Simulador de webhook (botão na TopBar) e ingestão automática a cada 30s"
+  ],
+  "structure": {
+    "src/components/office": "Kanban (PipelineBoard, Column, LeadCard)",
+    "src/components/ui": "primitivos reutilizáveis (Button, Card, Modal, Input, Badge, Avatar, EmptyState)",
+    "src/components/panels": "painéis grandes (TopBar, Sidebar, DashboardPanel, ChatPanel, LeadDetailsPanel, NewLeadModal)",
+    "src/hooks": "useLeads, usePipeline, useChat",
+    "src/services/api.ts": "config base + utils (uid, delay, nowIso)",
+    "src/services/integrations": "metaAdsService, eClinicaService, aiService",
+    "src/store": "Zustand: leadsStore, chatStore, tasksStore, notificationsStore, patientsStore",
+    "src/types": "Lead, Patient, Message, Task, Notification",
+    "src/pages": "Dashboard, Pipeline, Leads, Chat, Tasks, Patients"
+  },
+  "data_flow": [
+    "metaAdsService gera leads via webhook simulado (subscribe a cada 30s + botão manual)",
+    "useMetaAdsSimulation injeta leads no leadsStore e dispara notificação",
+    "leadsStore persiste em localStorage e expõe filtros/seletores",
+    "Pipeline lê via usePipeline e move leads entre status",
+    "ChatPanel cria thread no chatStore, sugestões via aiService",
+    "LeadDetailsPanel pode promover lead a paciente via eClinicaService"
+  ],
+  "extras": [
+    "Sugestões de IA contextuais por status do funil",
+    "Filtros por origem + status + busca livre",
+    "Sistema de notificações com badge no sino",
+    "Persistência via Zustand persist middleware",
+    "Webhook simulado pode ser disparado pela TopBar"
+  ]
+}
